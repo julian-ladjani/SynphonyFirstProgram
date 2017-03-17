@@ -1,0 +1,4 @@
+services:
+#    entretien_platform.example:
+#        class: Entretien\PlatformBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

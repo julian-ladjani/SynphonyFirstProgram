@@ -1,0 +1,6 @@
+Entretien_platform:
+    resource: "@EntretienPlatformBundle/Resources/config/routing.yml"
+    prefix:   /platform
+
+core:
+    resource: "@CoreBundle/Resources/config/routing.yml"

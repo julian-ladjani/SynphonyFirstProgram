@@ -1,0 +1,39 @@
+# src/Entretien/PlatformBundle/Resources/config/routing.yml
+
+Entretien_platform_home:
+    path:      /{page}/
+    defaults:
+        _controller: EntretienPlatformBundle:Advert:index
+        page:        1
+    requirements:
+        page: \d*
+    
+Entretien_platform_view:
+    path:      /advert/{id}.{comment}.{type}
+    defaults:
+        _controller: EntretienPlatformBundle:Advert:view
+        comment:          0
+        type:             0
+    requirements:
+        id:         \d+
+        comment:    \d+
+        type:       \d+
+
+Entretien_platform_add:
+    path:      /add
+    defaults:
+        _controller: EntretienPlatformBundle:Advert:add
+
+Entretien_platform_edit:
+    path:      /edit/{id}/
+    defaults:
+        _controller: EntretienPlatformBundle:Advert:edit
+    requirements:
+        id: \d+
+
+Entretien_platform_delete:
+    path:      /delete/{id}/
+    defaults:
+        _controller: EntretienPlatformBundle:Advert:delete
+    requirements:
+        id: \d+

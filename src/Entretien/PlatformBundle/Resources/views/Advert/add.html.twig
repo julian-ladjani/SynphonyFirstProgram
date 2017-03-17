@@ -1,0 +1,16 @@
+{# src/Entretien/PlatformBundle/Resources/views/Advert/add.html.twig #}
+
+{% extends "EntretienPlatformBundle::layout.html.twig" %}
+
+{% block body %}
+
+  <h2>Ajouter une annonce</h2>
+
+  {{ include("EntretienPlatformBundle:Advert:form.html.twig") }}
+
+  <p>
+    Attention : cette annonce sera ajoutée directement
+    sur la page d'accueil après validation du formulaire.
+  </p>
+
+{% endblock %}
