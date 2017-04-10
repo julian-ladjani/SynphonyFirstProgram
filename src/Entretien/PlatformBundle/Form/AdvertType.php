@@ -1,7 +1,6 @@
 <?php
 // src/OC/PlatformBundle/Form/AdvertType.php
 namespace Entretien\PlatformBundle\Form;
-use Entretien\PlatformBundle\Repository\CategoryRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;

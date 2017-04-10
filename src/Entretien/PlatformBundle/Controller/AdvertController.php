@@ -2,18 +2,11 @@
 // src/Entretien/PlatformBundle/Controller/AdvertController.php
 namespace Entretien\PlatformBundle\Controller;
 use Entretien\PlatformBundle\Entity\Advert;
-use Entretien\PlatformBundle\Entity\Application;
 use Entretien\PlatformBundle\Form\AdvertEditType;
 use Entretien\PlatformBundle\Form\AdvertType;
 use Entretien\PlatformBundle\Form\CommentType;
 use Entretien\PlatformBundle\Entity\Comment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 

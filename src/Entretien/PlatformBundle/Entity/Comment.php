@@ -1,10 +1,7 @@
 <?php
 
 namespace Entretien\PlatformBundle\Entity;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-// N'oubliez pas ce use :
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Comment
