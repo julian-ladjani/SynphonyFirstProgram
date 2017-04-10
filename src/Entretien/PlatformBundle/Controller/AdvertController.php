@@ -5,6 +5,7 @@ use Entretien\PlatformBundle\Entity\Advert;
 use Entretien\PlatformBundle\Entity\Application;
 use Entretien\PlatformBundle\Form\AdvertEditType;
 use Entretien\PlatformBundle\Form\AdvertType;
+use Entretien\PlatformBundle\Form\CommentType;
 use Entretien\PlatformBundle\Entity\Comment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -45,20 +46,25 @@ class AdvertController extends Controller
   {
     $em = $this->getDoctrine()->getManager();
     $ee = $this->getDoctrine()->getEntityManager();
+    
+    ////////////ADVERT/////////////////////////////////////////////////
+    
     $advert = $em->getRepository('EntretienPlatformBundle:Advert')->find($id);
     if (null === $advert) {
       throw new NotFoundHttpException("L'annonce d'id ".$id." n'existe pas.");
     }
-    // Récupération de la liste des candidatures de l'annonce
     $listApplications = $em
       ->getRepository('EntretienPlatformBundle:Application')
       ->findBy(array('advert' => $advert))
     ;
-    // Récupération des AdvertSkill de l'annonce
     $listAdvertSkills = $em
       ->getRepository('EntretienPlatformBundle:AdvertSkill')
       ->findBy(array('advert' => $advert))
     ;
+    $advert = $em->getRepository('EntretienPlatformBundle:Advert')->find($id);
+    
+    /////COMMENT LIST////////////////////////////////////////////////
+    
     $listComment = $em->getRepository('EntretienPlatformBundle:Comment')->findBy(array('advert' => $advert));
 
     if ($comment != 0 && $type == 1) {
@@ -67,28 +73,25 @@ class AdvertController extends Controller
       $ee->flush();
       return $this->redirectToRoute('Entretien_platform_view', array('id'=> $id));
     }
-    $advert = $em->getRepository('EntretienPlatformBundle:Advert')->find($id);
+    
+    //////////COMMENT FORM////////////////////////////////////////////
     
     $newComment = new Comment();
     $newComment->setDate(new \Datetime());
     $newComment->setAdvert($advert);
-    $form = $this->get('form.factory')->createBuilder(FormType::class, $newComment)
-      ->add('content',   TextareaType::class)
-      ->add('author',    TextType::class)
-      ->add('Envoyer',      SubmitType::class)
-      ->getForm()
-    ;
+    $form = $this->get('form.factory')->create(CommentType::class, $newComment);
+
     if ($request->isMethod('POST')) {
       $form->handleRequest($request);
       if ($form->isValid()) {
         $em = $this->getDoctrine()->getManager();
         $em->persist($newComment);
         $em->flush();
-
-        $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
         return $this->redirectToRoute('Entretien_platform_view', array('id' => $id));
       }
     }
+    
+    /////////////RENDER///////////////////////////////////////
     
     return $this->render('EntretienPlatformBundle:Advert:view.html.twig', array(
       'advert'           => $advert,
@@ -98,6 +101,7 @@ class AdvertController extends Controller
       'form'             => $form->createView(),
     ));
   }
+
   public function addAction(Request $request)
   {
     $advert = new Advert();
@@ -145,6 +149,7 @@ class AdvertController extends Controller
       'form'   => $form->createView(),
     ));
   }
+  
   public function deleteAction(Request $request, $id)
   {
     $em = $this->getDoctrine()->getManager();
@@ -173,6 +178,7 @@ class AdvertController extends Controller
       'form'   => $form->createView(),
     ));
   }
+  
   public function menuAction($limit)
   {
     $em = $this->getDoctrine()->getManager();
